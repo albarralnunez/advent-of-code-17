@@ -7,3 +7,5 @@ project/plugins/project/
 *.class
 *.log
 *ensime*
+*.out
+*.pyc
