@@ -104,7 +104,6 @@ def p_instruction(p):
     '''
     global max_value
     if not p[4]:
-        p[0] = 0
         return
     if not p[1] in registers:
         registers[p[1]] = 0
