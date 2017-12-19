@@ -8,10 +8,14 @@ final class Day3 {
     groupScore: Int, garbageCollected: Int
   ): (Int, Int) =
     stream match {
-      case '>'::tail => parserGroup(tail, depth, groupScore, garbageCollected)
-      case '!'::_::tail => parserGarbage(tail, depth, groupScore, garbageCollected)
-      case _::tail => parserGarbage(tail, depth, groupScore, garbageCollected+1)
-      case Nil => (groupScore, garbageCollected)
+      case '>'::tail =>
+        parserGroup (tail, depth, groupScore, garbageCollected)
+      case '!'::_::tail =>
+        parserGarbage (tail, depth, groupScore, garbageCollected)
+      case _::tail =>
+        parserGarbage (tail, depth, groupScore, garbageCollected+1)
+      case Nil =>
+        (groupScore, garbageCollected)
     }
 
   def parserGroup(
@@ -20,24 +24,24 @@ final class Day3 {
   ): (Int, Int) =
     stream match {
       case '{'::tail => 
-        parserGroup(tail, depth+1, groupScore, garbageCollected)
+        parserGroup (tail, depth+1, groupScore, garbageCollected)
       case '}'::tail =>
-        parserGroup(tail, depth-1, groupScore+depth, garbageCollected)
+        parserGroup (tail, depth-1, groupScore+depth, garbageCollected)
       case '<'::tail =>
-        parserGarbage(tail, depth, groupScore, garbageCollected)
+        parserGarbage (tail, depth, groupScore, garbageCollected)
       case '!'::_::tail =>
-        parserGroup(tail, depth, groupScore, garbageCollected)
+        parserGroup (tail, depth, groupScore, garbageCollected)
       case _::tail =>
-        parserGroup(tail, depth, groupScore, garbageCollected)
+        parserGroup (tail, depth, groupScore, garbageCollected)
       case Nil => (groupScore, garbageCollected)
     }
 
 
   def parser(stream: String): (Int, Int) =
-    parserGroup(stream.toList, 0, 0, 0)
+    parserGroup (stream.toList, 0, 0, 0)
 
   def solution(): (Int, Int) = 
-    parser(scala.io.Source.fromFile("../inputs/day3.txt").mkString)
+    parser (scala.io.Source.fromFile ("../inputs/day3.txt").mkString)
 
 }
 

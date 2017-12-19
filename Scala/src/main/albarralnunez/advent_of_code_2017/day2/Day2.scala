@@ -8,9 +8,10 @@ final class Day2 {
   type Spreadsheet = List[Line]
 
   def parseInput(filePath: String): Spreadsheet = {
-    val source: BufferedSource = Source.fromFile( filePath )
+    val source: BufferedSource = Source fromFile filePath
     val linesList: List[String] = source.getLines.toList
-    val splitLinesByTab: List[List[Int]] = linesList.map( _.split( "\t" ).map( _.toInt ).toList )
+    val splitLinesByTab: List[List[Int]] =
+      linesList map ( _.split( "\t" ).map ( _.toInt ).toList )
     splitLinesByTab
   }
 
@@ -18,16 +19,18 @@ final class Day2 {
 
   def divideFirstDivisible(line: Line): Int = {
     val combinationsOfTwo = line.combinations(2).toList
-    val dividePairsFirstDivSecond = combinationsOfTwo.map { case List(x, y) => (x / y toDouble, x % y) }
-    val dividePairsSecondDivFirst = combinationsOfTwo.map { case List(x, y) => (y / x toDouble, y % x) }
+    val dividePairsFirstDivSecond =
+      combinationsOfTwo map { case List(x, y) => (x / y toDouble, x % y) }
+    val dividePairsSecondDivFirst =
+      combinationsOfTwo map { case List(x, y) => (y / x toDouble, y % x) }
     val dividePairs = dividePairsFirstDivSecond ++ dividePairsSecondDivFirst
-    val firstValid = dividePairs.dropWhile { case (x, y) => y != 0 || x == 1 }
+    val firstValid = dividePairs dropWhile { case (x, y) => y != 0 || x == 1 }
     val (result: Double, _) = firstValid.head
     result.toInt
   }
 
   def calculateChecksum(spreadsheet: Spreadsheet, evaluator: Line => Int) =
-    spreadsheet.map(evaluator).sum
+    spreadsheet.map (evaluator).sum
 
   def problem1() = {
     calculateChecksum(parseInput("../inputs/day2_p1.txt"), differenceMaxMin)
