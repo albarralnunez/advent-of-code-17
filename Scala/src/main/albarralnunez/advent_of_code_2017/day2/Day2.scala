@@ -30,10 +30,10 @@ final class Day2 {
     spreadsheet.map(evaluator).sum
 
   def problem1() = {
-    calculateChecksum(parseInput("inputs/day2_p1.txt"), differenceMaxMin)
+    calculateChecksum(parseInput("../inputs/day2_p1.txt"), differenceMaxMin)
   }
 
   def problem2() = {
-    calculateChecksum(parseInput("inputs/day2_p2.txt"), divideFirstDivisible)
+    calculateChecksum(parseInput("../inputs/day2_p2.txt"), divideFirstDivisible)
   }
 }
